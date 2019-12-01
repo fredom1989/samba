@@ -11,7 +11,7 @@ firewall-cmd --reload
 #semanage fcontext -a -t samba_share_t "/srv/samba_group(/.*)?"
 setsebool -P smbd_anon_write=1
 #semanage fcontext -a -t public_content_rw_t "/srv/samba_pub(/.*)?"
-restorecon -Rv /srv/samba_*
+#restorecon -Rv /srv/samba_*
 setsebool -P samba_export_all_ro=1
 setsebool -P samba_export_all_rw=1
 setsebool -P samba_create_home_dirs=1
@@ -24,7 +24,6 @@ setsebool -P samba_share_nfs=1
 groupadd machines
 groupadd students
 adduser student1 -g students
-adduser student2 -g students
 useradd pc01$ -g machines -s /bin/false -d /dev/null
 smbpasswd -a -m pc01$
 echo "Mot de passe de l'utilisateur student1"
