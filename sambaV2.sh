@@ -1,12 +1,16 @@
+echo "Nom du serveur"
+read reponse;
+hostnamectl set-hostname $reponse
+
 yum install -y samba samba-client
 systemctl enable smb
 systemctl enable nmb
 firewall-cmd --permanent --add-service=samba
 firewall-cmd --reload
 
-semanage fcontext -a -t samba_share_t "/srv/samba_group(/.*)?"
+#semanage fcontext -a -t samba_share_t "/srv/samba_group(/.*)?"
 setsebool -P smbd_anon_write=1
-semanage fcontext -a -t public_content_rw_t "/srv/samba_pub(/.*)?"
+#semanage fcontext -a -t public_content_rw_t "/srv/samba_pub(/.*)?"
 restorecon -Rv /srv/samba_*
 setsebool -P samba_export_all_ro=1
 setsebool -P samba_export_all_rw=1
@@ -23,8 +27,9 @@ adduser student1 -g students
 adduser student2 -g students
 useradd pc01$ -g machines -s /bin/false -d /dev/null
 smbpasswd -a -m pc01$
+echo "Mot de passe de l'utilisateur student1"
 smbpasswd -a student1
-smbpasswd -a student2
+echo "Mot de passe de l'utilisateur root"
 smbpasswd -a root
 
 echo "Nom domain samba"
@@ -100,20 +105,14 @@ mkdir /netlogon
 mkdir /profiles
 mkdir /profiles/student1
 mkdir /profiles/student1.V2
-mkdir /profiles/student2
-mkdir /profiles/student2.V2
 mkdir /profiles/root
 
 chmod 700 /profiles/student1
 chmod 700 /profiles/student1.V2
-chmod 700 /profiles/student2
-chmod 700 /profiles/student2.V2
 chmod 700 /profiles/root
 
 chown student1:students /profiles/student1
 chown student1:students /profiles/student1.V2
-chown student2:students /profiles/student2
-chown student2:students /profiles/student2.V2
 chown root:root /profiles/root
 
 chmod 777 /home/public/
