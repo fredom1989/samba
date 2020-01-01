@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters]
+"DomainCompatibilityMode"=dword:00000001
+"DNSNameResolutionRequired"=dword:00000000
