@@ -42,10 +42,6 @@ systemctl enable dhcpd.service
 echo net.ipv4.ip_forward = 1 >> /usr/lib/sysctl.d/50-default.conf 
 sysctl -p
 
-#firewall-cmd --direct --permanent --add-rule ipv4 nat POSTROUTING 0 -o enp0s3 -j MASQUERADE
-#firewall-cmd --direct --permanent --add-rule ipv4 filter FORWARD 0 -i enp0s8 -o enp0s3 -j ACCEPT
-#firewall-cmd --direct --permanent --add-rule ipv4 filter FORWARD 0 -i enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISHED -j ACCEPT
-
 echo "Quel est l'interface externe? (enp0s3 par exemple)" 
 read IE;
 echo "Quel est l'interface interne? (enp0s8 par exemple)" 
